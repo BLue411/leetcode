@@ -1,0 +1,41 @@
+struct Meeting{
+    int start;
+    int end;
+    bool b = false;
+};
+
+bool cmp(Meeting a,Meeting b){
+    return a.end<b.end;
+}
+
+class Solution {
+public:
+    int maxEvents(vector<vector<int>>& events) {
+        Meeting m[1000010];
+
+        for(int i=0;i<events.size();i++){
+            m[i].start = events[i][0];
+            m[i].end = events[i][1];
+        }
+
+        sort(m,m+events.size(),cmp);
+
+        int max = 0;
+        for(int i=0;i<events.size();i++){
+            for(int j=m[i].start;j<=m[i].end;j++){
+                if(m[j].b==false){
+                    m[j].b=true;
+                    if(max<j) max=j;
+                    break;
+                }
+            }
+        }
+
+        int count = 0;
+        for(int i=0;i<=max;i++){
+            if(m[i].b==true) count++;
+        }
+
+        return count;
+    }
+};
