@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minStartValue(vector<int>& nums) {
+        int startValue = 0;
+        int sum,counter = 0;
+
+        while(counter<nums.size()) {
+            sum = ++startValue;
+            for (int i = 0; i < nums.size(); i++) {
+                sum += nums[i];
+                if (sum < 1) {
+                    counter = 0;
+                    break;
+                }
+                else counter++;
+            }
+        }
+
+        return startValue;
+    }
+};
